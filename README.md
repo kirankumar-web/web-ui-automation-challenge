@@ -28,7 +28,45 @@ The framework supports **parallel execution**, **screenshots on failure**, and *
 
 ## 📂 Project Structure
 
-│ ├── pom.xml ├── README.md │ ├── src │ ├── main │ │ └── java │ │ └── com.kroll.Automation.Framework │ │ ├── Base │ │ ├── Driver │ │ ├── Pages │ │ ├── Listners │ │ │ └── TestListener.java │ │ └── Utils │ │ ├── ExtentManager.java │ │ └── ScreenshotUtils.java │ │ │ └── test │ ├── java │ │ └── com.kroll.Automation.tests │ │ └── DemoSiteUITests.java │ │ │ └── resources │ └── testng.xml │ ├── test-output │ └── ExtentReport.html │ ├── reports │ └── screenshots │ └── target └── allure-results
+web-ui-automation-challenge
+├── pom.xml
+├── README.md
+│
+├── src
+│   ├── main
+│   │   └── java
+│   │       └── com
+│   │           └── kroll
+│   │               └── Automation
+│   │                   └── Framework
+│   │                       ├── Base
+│   │                       ├── Driver
+│   │                       ├── Pages
+│   │                       ├── Listners
+│   │                       │   └── TestListener.java
+│   │                       └── Utils
+│   │                           ├── ExtentManager.java
+│   │                           └── ScreenshotUtils.java
+│   │
+│   └── test
+│       ├── java
+│       │   └── com
+│       │       └── kroll
+│       │           └── Automation
+│       │               └── tests
+│       │                   └── DemoSiteUITests.java
+│       │
+│       └── resources
+│           └── testng.xml
+│
+├── test-output
+│   └── ExtentReport.html
+│
+├── reports
+│   └── screenshots
+│
+└── target
+    └── allure-results
 
 
 ## ⚙️ Prerequisites
