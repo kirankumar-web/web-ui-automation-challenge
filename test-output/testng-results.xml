@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="6" passed="6" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-02-04T11:03:58 IST" name="Default suite" finished-at="2026-02-04T11:04:08 IST" duration-ms="9353">
+    <groups>
+    </groups>
+    <test started-at="2026-02-04T11:03:58 IST" name="Default test" finished-at="2026-02-04T11:04:08 IST" duration-ms="9353">
+      <class name="com.kroll.Automation.tests.DemoSiteUITests">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.kroll.Automation.tests.DemoSiteUITests@6f01b95f]" started-at="2026-02-04T11:03:59 IST" name="beforeClass" finished-at="2026-02-04T11:04:00 IST" duration-ms="1788" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.kroll.Automation.tests.DemoSiteUITests@6f01b95f]" started-at="2026-02-04T11:04:00 IST" name="beforeMethod" finished-at="2026-02-04T11:04:01 IST" duration-ms="251" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="test1_verifyLoginForm()[pri:0, instance:com.kroll.Automation.tests.DemoSiteUITests@6f01b95f]" started-at="2026-02-04T11:04:01 IST" name="test1_verifyLoginForm" finished-at="2026-02-04T11:04:01 IST" duration-ms="253" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test1_verifyLoginForm -->
+        <test-method is-config="true" signature="afterMethod()[pri:0, instance:com.kroll.Automation.tests.DemoSiteUITests@6f01b95f]" started-at="2026-02-04T11:04:01 IST" name="afterMethod" finished-at="2026-02-04T11:04:01 IST" duration-ms="12" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.kroll.Automation.tests.DemoSiteUITests@6f01b95f]" started-at="2026-02-04T11:04:01 IST" name="beforeMethod" finished-at="2026-02-04T11:04:01 IST" duration-ms="18" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="test2_verifyListGroup()[pri:0, instance:com.kroll.Automation.tests.DemoSiteUITests@6f01b95f]" started-at="2026-02-04T11:04:01 IST" name="test2_verifyListGroup" finished-at="2026-02-04T11:04:01 IST" duration-ms="45" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test2_verifyListGroup -->
+        <test-method is-config="true" signature="afterMethod()[pri:0, instance:com.kroll.Automation.tests.DemoSiteUITests@6f01b95f]" started-at="2026-02-04T11:04:01 IST" name="afterMethod" finished-at="2026-02-04T11:04:01 IST" duration-ms="4" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.kroll.Automation.tests.DemoSiteUITests@6f01b95f]" started-at="2026-02-04T11:04:01 IST" name="beforeMethod" finished-at="2026-02-04T11:04:01 IST" duration-ms="17" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="test3_verifyDropdown()[pri:0, instance:com.kroll.Automation.tests.DemoSiteUITests@6f01b95f]" started-at="2026-02-04T11:04:01 IST" name="test3_verifyDropdown" finished-at="2026-02-04T11:04:01 IST" duration-ms="167" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test3_verifyDropdown -->
+        <test-method is-config="true" signature="afterMethod()[pri:0, instance:com.kroll.Automation.tests.DemoSiteUITests@6f01b95f]" started-at="2026-02-04T11:04:01 IST" name="afterMethod" finished-at="2026-02-04T11:04:01 IST" duration-ms="3" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.kroll.Automation.tests.DemoSiteUITests@6f01b95f]" started-at="2026-02-04T11:04:01 IST" name="beforeMethod" finished-at="2026-02-04T11:04:01 IST" duration-ms="17" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="test4_verifyButtonsState()[pri:0, instance:com.kroll.Automation.tests.DemoSiteUITests@6f01b95f]" started-at="2026-02-04T11:04:01 IST" name="test4_verifyButtonsState" finished-at="2026-02-04T11:04:01 IST" duration-ms="41" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test4_verifyButtonsState -->
+        <test-method is-config="true" signature="afterMethod()[pri:0, instance:com.kroll.Automation.tests.DemoSiteUITests@6f01b95f]" started-at="2026-02-04T11:04:01 IST" name="afterMethod" finished-at="2026-02-04T11:04:01 IST" duration-ms="3" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.kroll.Automation.tests.DemoSiteUITests@6f01b95f]" started-at="2026-02-04T11:04:01 IST" name="beforeMethod" finished-at="2026-02-04T11:04:01 IST" duration-ms="17" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="test5_waitForButtonAndClick()[pri:0, instance:com.kroll.Automation.tests.DemoSiteUITests@6f01b95f]" started-at="2026-02-04T11:04:01 IST" name="test5_waitForButtonAndClick" finished-at="2026-02-04T11:04:08 IST" duration-ms="6447" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test5_waitForButtonAndClick -->
+        <test-method is-config="true" signature="afterMethod()[pri:0, instance:com.kroll.Automation.tests.DemoSiteUITests@6f01b95f]" started-at="2026-02-04T11:04:08 IST" name="afterMethod" finished-at="2026-02-04T11:04:08 IST" duration-ms="3" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.kroll.Automation.tests.DemoSiteUITests@6f01b95f]" started-at="2026-02-04T11:04:08 IST" name="beforeMethod" finished-at="2026-02-04T11:04:08 IST" duration-ms="19" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="test6_verifyGridValue()[pri:0, instance:com.kroll.Automation.tests.DemoSiteUITests@6f01b95f]" started-at="2026-02-04T11:04:08 IST" name="test6_verifyGridValue" finished-at="2026-02-04T11:04:08 IST" duration-ms="30" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test6_verifyGridValue -->
+        <test-method is-config="true" signature="afterMethod()[pri:0, instance:com.kroll.Automation.tests.DemoSiteUITests@6f01b95f]" started-at="2026-02-04T11:04:08 IST" name="afterMethod" finished-at="2026-02-04T11:04:08 IST" duration-ms="4" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method is-config="true" signature="afterClass()[pri:0, instance:com.kroll.Automation.tests.DemoSiteUITests@6f01b95f]" started-at="2026-02-04T11:04:08 IST" name="afterClass" finished-at="2026-02-04T11:04:08 IST" duration-ms="105" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterClass -->
+      </class> <!-- com.kroll.Automation.tests.DemoSiteUITests -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

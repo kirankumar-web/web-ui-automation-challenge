@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Suite" parallel="tests" thread-count="5">
+
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+
+        <listener class-name="com.kroll.Automation.Framework.Listners.TestListener"/>
+    </listeners>
+
+    <test name="UI Tests">
+        <classes>
+            <class name="com.kroll.Automation.tests.DemoSiteUITests"/>
+        </classes>
+    </test>
+
+</suite>
