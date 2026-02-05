@@ -1,5 +1,5 @@
 trigger:
-  - main
+- main
 
 # ================= AGENT =================
 pool:
@@ -12,16 +12,16 @@ parameters:
   type: string
   default: QA
   values:
-    - QA
-    - UAT
+  - QA
+  - UAT
 
 - name: BROWSER
   displayName: Select Browser
   type: string
   default: chrome
   values:
-    - chrome
-    - firefox
+  - chrome
+  - firefox
 
 # ================= VARIABLES =================
 variables:
