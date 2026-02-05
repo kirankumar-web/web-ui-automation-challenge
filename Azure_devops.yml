@@ -1,0 +1,106 @@
+trigger:
+  - main   # change if needed
+
+parameters:
+- name: ENV
+  displayName: Select Environment
+  type: string
+  default: QA
+  values:
+    - QA
+    - UAT
+
+- name: BROWSER
+  displayName: Select Browser
+  type: string
+  default: chrome
+  values:
+    - chrome
+    - firefox
+
+variables:
+  ALLURE_RESULTS: target/allure-results
+  ALLURE_REPORT: target/allure-report
+  EXTENT_REPORT: test-output/ExtentReport.html
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+
+# ---------------- CHECKOUT ----------------
+- stage: Checkout
+  displayName: Checkout Code
+  jobs:
+  - job: CheckoutJob
+    steps:
+    - checkout: self
+
+# ---------------- BUILD & TEST ----------------
+- stage: Test
+  displayName: Clean & Execute Tests
+  jobs:
+  - job: RunTests
+    steps:
+    - task: Maven@3
+      displayName: Maven Clean Test
+      inputs:
+        mavenPomFile: pom.xml
+        goals: >
+          clean test
+          -Dsurefire.suiteXmlFiles=src/test/resources/testng.xml
+          -Denv=${{ parameters.ENV }}
+          -Dbrowser=${{ parameters.BROWSER }}
+        javaHomeOption: JDKVersion
+        jdkVersionOption: '1.17'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+
+# ---------------- ALLURE REPORT ----------------
+- stage: Allure
+  displayName: Generate & Publish Allure Report
+  dependsOn: Test
+  jobs:
+  - job: AllureReport
+    steps:
+    - task: Maven@3
+      displayName: Generate Allure Report
+      inputs:
+        mavenPomFile: pom.xml
+        goals: allure:report
+        javaHomeOption: JDKVersion
+        jdkVersionOption: '1.17'
+
+    # Publish Allure results as artifact
+    - task: PublishPipelineArtifact@1
+      displayName: Publish Allure Results
+      inputs:
+        targetPath: $(ALLURE_RESULTS)
+        artifact: allure-results
+
+# ---------------- EXTENT REPORT ----------------
+- stage: Extent
+  displayName: Publish Extent Report
+  dependsOn: Test
+  jobs:
+  - job: ExtentReport
+    steps:
+    - task: PublishPipelineArtifact@1
+      displayName: Publish Extent Report
+      inputs:
+        targetPath: test-output
+        artifact: extent-report
+
+# ---------------- ARCHIVE ARTIFACTS ----------------
+- stage: Archive
+  displayName: Archive Test Artifacts
+  dependsOn:
+    - Test
+  jobs:
+  - job: ArchiveJob
+    steps:
+    - task: PublishPipelineArtifact@1
+      displayName: Archive Surefire Reports
+      inputs:
+        targetPath: target/surefire-reports
+        artifact: surefire-reports

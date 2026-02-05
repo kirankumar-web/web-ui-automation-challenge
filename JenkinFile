@@ -5,6 +5,11 @@ pipeline {
         maven 'Maven-3.9'      
         jdk 'JDK-17'          
     }
+    
+    parameters {
+    choice(name: 'ENV', choices: ['QA', 'UAT'], description: 'Select Environment')
+    choice(name: 'BROWSER', choices: ['chrome', 'firefox'], description: 'Select Browser')
+}
 
     environment {
         ALLURE_RESULTS = "target/allure-results"
@@ -21,13 +26,15 @@ pipeline {
         }
 
         stage('Clean & Execute Tests') {
-            steps {
-                sh '''
-                    mvn clean test \
-                    -Dsurefire.suiteXmlFiles=src/test/resources/testng.xml
-                '''
-            }
-        }
+    steps {
+        sh """
+            mvn clean test \
+            -Dsurefire.suiteXmlFiles=src/test/resources/testng.xml \
+            -Denv=${params.ENV} \
+            -Dbrowser=${params.BROWSER}
+        """
+    }
+}
 
         stage('Generate Allure Report') {
             steps {
