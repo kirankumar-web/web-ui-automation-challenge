@@ -75,11 +75,18 @@ stages:
         mvn allure:report
       displayName: Generate Allure Report
 
+    # - task: PublishPipelineArtifact@1
+    #   displayName: Publish Allure Results
+    #   inputs:
+    #     targetPath: $(ALLURE_RESULTS)
+    #     artifact: allure-results
+
     - task: PublishPipelineArtifact@1
       displayName: Publish Allure Results
+      condition: exists('target/allure-results')
       inputs:
-        targetPath: $(ALLURE_RESULTS)
-        artifact: allure-results
+        targetPath: target/allure-results
+        artifact: allure-results    
 
 # ================= EXTENT REPORT =================
 - stage: Extent
