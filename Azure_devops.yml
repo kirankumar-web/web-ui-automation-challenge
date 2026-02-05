@@ -1,11 +1,9 @@
 trigger:
 - main
 
-# ================= AGENT =================
 pool:
   name: local_agent
 
-# ================= PARAMETERS =================
 parameters:
 - name: ENV
   displayName: Select Environment
@@ -23,14 +21,12 @@ parameters:
   - chrome
   - firefox
 
-# ================= VARIABLES =================
 variables:
   ALLURE_RESULTS: target/allure-results
-  EXTENT_REPORT: test-output
 
-# ================= STAGES =================
+stages:
 
-# ---------- CHECKOUT ----------
+# ================= CHECKOUT =================
 - stage: Checkout
   displayName: Checkout Code
   jobs:
@@ -38,16 +34,15 @@ variables:
     steps:
     - checkout: self
 
-# ---------- BUILD & TEST ----------
+# ================= TEST =================
 - stage: Test
   displayName: Clean & Execute Tests
   dependsOn: Checkout
   jobs:
   - job: RunTests
-    displayName: Run Maven Tests
     steps:
     - script: |
-        echo "Using Maven:"
+        echo "Maven details"
         which mvn
         mvn -version
 
@@ -58,14 +53,12 @@ variables:
       displayName: Maven Clean Test
 
     - task: PublishTestResults@2
-      displayName: Publish TestNG Results
       condition: always()
       inputs:
         testResultsFormat: JUnit
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
-        failTaskOnFailedTests: true
 
-# ---------- ALLURE REPORT ----------
+# ================= ALLURE =================
 - stage: Allure
   displayName: Generate & Publish Allure Report
   dependsOn: Test
@@ -82,24 +75,10 @@ variables:
         else
           echo "##vso[task.setvariable variable=ALLURE_EXISTS]false"
         fi
-      displayName: Check Allure Results Folder
+      displayName: Check Allure Results
 
     - task: PublishPipelineArtifact@1
-      displayName: Publish Allure Results
       condition: eq(variables.ALLURE_EXISTS, 'true')
       inputs:
         targetPath: target/allure-results
         artifact: allure-results
-
-# ---------- EXTENT REPORT ----------
-- stage: Extent
-  displayName: Publish Extent Report
-  dependsOn: Test
-  jobs:
-  - job: ExtentReport
-    steps:
-    - task: PublishPipelineArtifact@1
-      displayName: Publish Extent Report
-      inputs:
-        targetPath: test-output
-        artifact: extent-report
