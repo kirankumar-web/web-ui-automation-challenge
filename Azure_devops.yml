@@ -1,8 +1,8 @@
+trigger:
+  - main
+
 pool:
   name: local-agent
-
-trigger:
-  - main   # change if needed
 
 parameters:
 - name: ENV
@@ -26,9 +26,6 @@ variables:
   ALLURE_REPORT: target/allure-report
   EXTENT_REPORT: test-output/ExtentReport.html
 
-pool:
-  vmImage: 'ubuntu-latest'
-
 stages:
 
 # ---------------- CHECKOUT ----------------
@@ -42,6 +39,7 @@ stages:
 # ---------------- BUILD & TEST ----------------
 - stage: Test
   displayName: Clean & Execute Tests
+  dependsOn: Checkout
   jobs:
   - job: RunTests
     steps:
@@ -74,7 +72,6 @@ stages:
         javaHomeOption: JDKVersion
         jdkVersionOption: '1.17'
 
-    # Publish Allure results as artifact
     - task: PublishPipelineArtifact@1
       displayName: Publish Allure Results
       inputs:
@@ -97,8 +94,7 @@ stages:
 # ---------------- ARCHIVE ARTIFACTS ----------------
 - stage: Archive
   displayName: Archive Test Artifacts
-  dependsOn:
-    - Test
+  dependsOn: Test
   jobs:
   - job: ArchiveJob
     steps:
