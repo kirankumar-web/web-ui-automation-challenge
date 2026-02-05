@@ -1,10 +1,11 @@
 trigger:
   - main
 
-# Self-hosted agent pool
+# ================= AGENT =================
 pool:
   name: local_agent
 
+# ================= PARAMETERS =================
 parameters:
 - name: ENV
   displayName: Select Environment
@@ -22,14 +23,14 @@ parameters:
     - chrome
     - firefox
 
+# ================= VARIABLES =================
 variables:
   ALLURE_RESULTS: target/allure-results
-  ALLURE_REPORT: target/allure-report
-  EXTENT_REPORT: test-output/ExtentReport.html
+  EXTENT_REPORT: test-output
 
-stages:
+# ================= STAGES =================
 
-# ================= CHECKOUT =================
+# ---------- CHECKOUT ----------
 - stage: Checkout
   displayName: Checkout Code
   jobs:
@@ -37,7 +38,7 @@ stages:
     steps:
     - checkout: self
 
-# ================= BUILD & TEST =================
+# ---------- BUILD & TEST ----------
 - stage: Test
   displayName: Clean & Execute Tests
   dependsOn: Checkout
@@ -46,7 +47,7 @@ stages:
     displayName: Run Maven Tests
     steps:
     - script: |
-        echo "Using Maven from:"
+        echo "Using Maven:"
         which mvn
         mvn -version
 
@@ -64,45 +65,7 @@ stages:
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
         failTaskOnFailedTests: true
 
-# ================= ALLURE REPORT =================
-- stage: Allure
-  displayName: Generate & Publish Allure Report
-  dependsOn: Test
-  jobs:
-  - job: AllureReport
-    steps:
-    - script: |
-        mvn allure:report
-      displayName: Generate Allure Report
-
-    # - task: PublishPipelineArtifact@1
-    #   displayName: Publish Allure Results
-    #   inputs:
-    #     targetPath: $(ALLURE_RESULTS)
-    #     artifact: allure-results
-
-    - task: PublishPipelineArtifact@1
-      displayName: Publish Allure Results
-      condition: exists('target/allure-results')
-      inputs:
-        targetPath: target/allure-results
-        artifact: allure-results    
-
-# ================= EXTENT REPORT =================
-- stage: Extent
-  displayName: Publish Extent Report
-  dependsOn: Test
-  jobs:
-  - job: ExtentReport
-    steps:
-    - task: PublishPipelineArtifact@1
-      displayName: Publish Extent Report
-      inputs:
-        targetPath: test-output
-        artifact: extent-report
-
-# ================= ARCHIVE =================
-- # ================= ALLURE REPORT =================
+# ---------- ALLURE REPORT ----------
 - stage: Allure
   displayName: Generate & Publish Allure Report
   dependsOn: Test
@@ -127,3 +90,16 @@ stages:
       inputs:
         targetPath: target/allure-results
         artifact: allure-results
+
+# ---------- EXTENT REPORT ----------
+- stage: Extent
+  displayName: Publish Extent Report
+  dependsOn: Test
+  jobs:
+  - job: ExtentReport
+    steps:
+    - task: PublishPipelineArtifact@1
+      displayName: Publish Extent Report
+      inputs:
+        targetPath: test-output
+        artifact: extent-report
