@@ -2,7 +2,7 @@ trigger:
   - main
 
 pool:
-  name: local-agent
+  name: local_agent
 
 parameters:
 - name: ENV
