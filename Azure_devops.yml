@@ -45,20 +45,24 @@ stages:
   - job: RunTests
     displayName: Run Maven Tests
     steps:
-    - task: Maven@3
-      displayName: Maven Clean Test
-      inputs:
-        mavenPomFile: pom.xml
-        goals: >
-          clean test
-          -Dsurefire.suiteXmlFiles=src/test/resources/testng.xml
-          -Denv=${{ parameters.ENV }}
+    - script: |
+        echo "Using Maven from:"
+        which mvn
+        mvn -version
+
+        mvn clean test \
+          -Dsurefire.suiteXmlFiles=src/test/resources/testng.xml \
+          -Denv=${{ parameters.ENV }} \
           -Dbrowser=${{ parameters.BROWSER }}
-        javaHomeOption: JDKVersion
-        jdkVersionOption: '1.17'
-        mavenVersionOption: Default
-        publishJUnitResults: true
+      displayName: Maven Clean Test
+
+    - task: PublishTestResults@2
+      displayName: Publish TestNG Results
+      condition: always()
+      inputs:
+        testResultsFormat: JUnit
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        failTaskOnFailedTests: true
 
 # ================= ALLURE REPORT =================
 - stage: Allure
@@ -67,14 +71,9 @@ stages:
   jobs:
   - job: AllureReport
     steps:
-    - task: Maven@3
+    - script: |
+        mvn allure:report
       displayName: Generate Allure Report
-      inputs:
-        mavenPomFile: pom.xml
-        goals: allure:report
-        javaHomeOption: JDKVersion
-        jdkVersionOption: '1.17'
-        mavenVersionOption: Default
 
     - task: PublishPipelineArtifact@1
       displayName: Publish Allure Results
