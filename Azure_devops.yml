@@ -1,6 +1,7 @@
 trigger:
   - main
 
+# Self-hosted agent pool
 pool:
   name: local_agent
 
@@ -28,7 +29,7 @@ variables:
 
 stages:
 
-# ---------------- CHECKOUT ----------------
+# ================= CHECKOUT =================
 - stage: Checkout
   displayName: Checkout Code
   jobs:
@@ -36,12 +37,13 @@ stages:
     steps:
     - checkout: self
 
-# ---------------- BUILD & TEST ----------------
+# ================= BUILD & TEST =================
 - stage: Test
   displayName: Clean & Execute Tests
   dependsOn: Checkout
   jobs:
   - job: RunTests
+    displayName: Run Maven Tests
     steps:
     - task: Maven@3
       displayName: Maven Clean Test
@@ -54,10 +56,11 @@ stages:
           -Dbrowser=${{ parameters.BROWSER }}
         javaHomeOption: JDKVersion
         jdkVersionOption: '1.17'
+        mavenVersionOption: Default
         publishJUnitResults: true
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
 
-# ---------------- ALLURE REPORT ----------------
+# ================= ALLURE REPORT =================
 - stage: Allure
   displayName: Generate & Publish Allure Report
   dependsOn: Test
@@ -71,6 +74,7 @@ stages:
         goals: allure:report
         javaHomeOption: JDKVersion
         jdkVersionOption: '1.17'
+        mavenVersionOption: Default
 
     - task: PublishPipelineArtifact@1
       displayName: Publish Allure Results
@@ -78,7 +82,7 @@ stages:
         targetPath: $(ALLURE_RESULTS)
         artifact: allure-results
 
-# ---------------- EXTENT REPORT ----------------
+# ================= EXTENT REPORT =================
 - stage: Extent
   displayName: Publish Extent Report
   dependsOn: Test
@@ -91,7 +95,7 @@ stages:
         targetPath: test-output
         artifact: extent-report
 
-# ---------------- ARCHIVE ARTIFACTS ----------------
+# ================= ARCHIVE =================
 - stage: Archive
   displayName: Archive Test Artifacts
   dependsOn: Test
