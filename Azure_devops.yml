@@ -1,3 +1,6 @@
+pool:
+  name: local-agent
+
 trigger:
   - main   # change if needed
 
