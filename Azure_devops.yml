@@ -102,14 +102,28 @@ stages:
         artifact: extent-report
 
 # ================= ARCHIVE =================
-- stage: Archive
-  displayName: Archive Test Artifacts
+- # ================= ALLURE REPORT =================
+- stage: Allure
+  displayName: Generate & Publish Allure Report
   dependsOn: Test
   jobs:
-  - job: ArchiveJob
+  - job: AllureReport
     steps:
+    - script: |
+        mvn allure:report
+      displayName: Generate Allure Report
+
+    - script: |
+        if [ -d "target/allure-results" ]; then
+          echo "##vso[task.setvariable variable=ALLURE_EXISTS]true"
+        else
+          echo "##vso[task.setvariable variable=ALLURE_EXISTS]false"
+        fi
+      displayName: Check Allure Results Folder
+
     - task: PublishPipelineArtifact@1
-      displayName: Archive Surefire Reports
+      displayName: Publish Allure Results
+      condition: eq(variables.ALLURE_EXISTS, 'true')
       inputs:
-        targetPath: target/surefire-reports
-        artifact: surefire-reports
+        targetPath: target/allure-results
+        artifact: allure-results
